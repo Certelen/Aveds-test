@@ -8,6 +8,7 @@ from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.types import Message
 from aiogram.utils.formatting import Bold, Text
+
 from database import connection
 from settings import HOST, TG_TOKEN
 
