@@ -23,6 +23,7 @@
 
 ## Изменение переменных среды
 В файле docker-compose.yml измените переменны в строках:
+
 backend -> environment:
 - DB_NAME=<Имя базы данных>
 - DB_USERNAME=<Имя пользователя базы данных>
@@ -30,6 +31,7 @@ backend -> environment:
 - DB_HOST=<Адрес базы данных>
 - DB_PORT=<Порт базы данных>
 - SECRET=<Ключ для хеширования данных>
+- 
 frontend -> environment:
 - DB_NAME=<Имя базы данных>
 - DB_USERNAME=<Имя пользователя базы данных>
@@ -38,6 +40,7 @@ frontend -> environment:
 - DB_PORT=<Порт базы данных>
 - TG_TOKEN=<Токен бота в Телеграме>
 - HOST=<Адрес сайта>
+- 
 frontend -> environment:
 - POSTGRES_PASSWORD: <Установить пароль для пользователя базы данных>
 
