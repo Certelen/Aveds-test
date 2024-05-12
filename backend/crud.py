@@ -1,14 +1,16 @@
-from sqlalchemy.orm import Session
-from fastapi import Depends, HTTPException, status
+import hashlib
+from datetime import datetime, timedelta, timezone
 from typing import Annotated
-from passlib.context import CryptContext
-from datetime import datetime, timezone, timedelta
+
+from fastapi import Depends, HTTPException, status
 from jose import JWTError, jwt
+from passlib.context import CryptContext
+from sqlalchemy.orm import Session
 
 import models
 import schemas
-from settings import SECRET, ALGORITHM, oauth2_scheme
 from database import get_db
+from settings import ALGORITHM, SECRET, oauth2_scheme
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -70,8 +72,10 @@ async def get_current_user(
 
 
 def create_user(db: Session, user: schemas.UserCreate):
+    tg_hash = user.username
+    tg_hash = tg_hash.encode(encoding='UTF-8', errors='strict')
     db_user = models.User(username=user.username,
-                          tg_token=get_password_hash(user.username),
+                          tg_token=hashlib.sha1(tg_hash).hexdigest(),
                           name=user.name,
                           password=get_password_hash(user.password))
     db.add(db_user)

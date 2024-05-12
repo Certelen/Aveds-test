@@ -1,18 +1,25 @@
-from fastapi import Depends, FastAPI, HTTPException, status
-from sqlalchemy.orm import Session
-from typing import Annotated
-from fastapi.security import OAuth2PasswordRequestForm
 from datetime import timedelta
+from typing import Annotated
+
+from fastapi import Depends, FastAPI, HTTPException, status
+from fastapi.responses import RedirectResponse
+from fastapi.security import OAuth2PasswordRequestForm
+from sqlalchemy.orm import Session
 
 import crud
-from models import Base, User
 import schemas
-from settings import ACCESS_TOKEN_EXPIRE_MINUTES
 from database import engine, get_db
+from models import Base, User
+from settings import ACCESS_TOKEN_EXPIRE_MINUTES
 
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+
+@app.get("/")
+async def docs_redirect():
+    return RedirectResponse(url='/docs')
 
 
 @app.post("/user", response_model=schemas.User)
@@ -58,5 +65,5 @@ async def create_tg_link(
 ):
     return {
         'tg_url':
-        f'https://t.me/SymLenght_Aveds-test?start={current_user.tg_token}'
+        f'https://t.me/SymLenght_AvedsTestBot?start={current_user.tg_token}'
     }

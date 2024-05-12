@@ -11,7 +11,6 @@ class User(Base):
     username = Column(String(length=NAME_LENGHT),
                       unique=True, index=True, nullable=False)
     name = Column(String(length=NAME_LENGHT), nullable=False)
-    tg_username = Column(String, unique=True, nullable=True)
-    tg_link = Column(String, unique=True, nullable=True)
+    tg_username = Column(String, nullable=True)
     tg_token = Column(String, unique=True, nullable=True)
     password = Column(String)
