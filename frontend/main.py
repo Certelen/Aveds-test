@@ -1,6 +1,5 @@
 import asyncio
 import logging
-
 from aiogram import Bot, Dispatcher, F
 from aiogram.filters.command import CommandObject, CommandStart
 from aiogram.fsm.context import FSMContext
@@ -8,7 +7,6 @@ from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.types import Message
 from aiogram.utils.formatting import Bold, Text
-
 from database import connection
 from settings import HOST, TG_TOKEN
 

@@ -1,12 +1,10 @@
 import hashlib
 from datetime import datetime, timedelta, timezone
 from typing import Annotated
-
 from fastapi import Depends, HTTPException, status
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
-
 import models
 import schemas
 from database import get_db
@@ -39,8 +37,7 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     else:
         expire = datetime.now(timezone.utc) + timedelta(minutes=15)
     to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, SECRET, algorithm=ALGORITHM)
-    return encoded_jwt
+    return jwt.encode(to_encode, SECRET, algorithm=ALGORITHM)
 
 
 def get_user(db, username: str):
