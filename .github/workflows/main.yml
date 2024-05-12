@@ -36,21 +36,15 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME}}
           password: ${{ secrets.DOCKER_PASSWORD}}
-      - name: Set up Backend Docker Build
-        working-directory: ./backend
-        uses: docker/setup-buildx-action@v1 
-      - name: Push to Docker Hub
-        working-directory: ./backend
-        uses: docker/build-push-action@v2 
+      - name: Set up and push Backend Docker Buildx
+        uses: docker/build-push-action@v2
         with:
+          file: backend/Dockerfile
           push: true
-          tags: certelen/aveds-test-backend:latest
-      - name: Set up Backend Docker Build
-        working-directory: ./frontend
-        uses: docker/setup-buildx-action@v1 
-      - name: Push to Docker Hub
-        working-directory: ./frontend
-        uses: docker/build-push-action@v2 
+          tags: ${{ secrets.DOCKER_USERNAME}}/aveds-test-backend:latest 
+      - name: Set up and push Frontend Docker Buildx
+        uses: docker/build-push-action@v2
         with:
+          file: frontend/Dockerfile
           push: true
-          tags: certelen/aveds-test-frontend:latest 
+          tags: ${{ secrets.DOCKER_USERNAME}}/aveds-test-frontend:latest 
