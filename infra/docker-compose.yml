@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: postgres
 
   backend:
-    build: ../backend
+    image: certelen/aveds-test-backend:latest
     restart: always
     environment:
       - DB_NAME=postgres
@@ -21,7 +21,7 @@ services:
       - SECRET=secret
 
   frontend:
-    build: ../frontend
+    image: certelen/aveds-test-frontend:latest
     restart: always
     environment:
       - DB_NAME=postgres
